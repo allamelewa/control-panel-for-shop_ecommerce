@@ -1,0 +1,33 @@
+.navbar{
+    background: cornflowerblue;
+    width:100% ;
+    height: 60px;
+}
+
+ul{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 20px;
+}
+li{
+    text-align: center;
+    color:#fff;
+    padding: 3px;
+    border-radius: 15px;
+}
+li:hover{
+    background: #fff ;
+    color:  cornflowerblue;
+}
+.link{
+   color: #fff;
+}
+.link:hover{
+    text-decoration: none;
+}
