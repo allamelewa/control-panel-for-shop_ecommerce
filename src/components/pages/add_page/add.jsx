@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios'
 import './add.css';
  
 class Add extends Component {
@@ -15,11 +16,14 @@ class Add extends Component {
     
     handleSubmit=(event)=>{
         event.preventDefault();
-        if(this.state.id!==null&&this.state.title!==null&&this.state.company!==null&&this.state.price!==null&&this.state.info!==null&&this.state.img!==null){
+       /* if(this.state.id!==null&&this.state.title!==null&&this.state.company!==null&&this.state.price!==null&&this.state.info!==null&&this.state.img!==null){
             alert('Send Form Success....')
         }else{
             alert('Sending faild')
-        }
+        }*/
+       // alert('Hello.....');
+        axios.get('http://localhost:5000/product')
+        .then(res=>alert(res.data));
     }
     changeId=(event)=>{
       this.setState({id:event.target.value})
