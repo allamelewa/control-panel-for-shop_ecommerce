@@ -32,8 +32,11 @@ router.route('/add').post((req,res)=>{
     const company=req.body.company;
     const price=req.body.price;
     const img=req.body.img;
-    console.log('\x1b[32m',"id: "+id+", title: "+title+", info: "+info+", company: "+company+", price: "+price+", Img: "+img);
-    const newProduct=new Product({id,title,price,company,info,img});
+    const inCart=req.body.inCart;
+    const count=req.body.count;
+    const total=req.body.total;
+    //console.log('\x1b[32m',"id: "+id+", title: "+title+", info: "+info+", company: "+company+", price: "+price+", Img: "+img);
+    const newProduct=new Product({id,title,price,company,info,img,inCart,count,total});
     newProduct.save()
     .then(()=>{
         console.log('\x1b[32m','Product added!');
@@ -52,8 +55,11 @@ router.route('/upload').post((req,res)=>{
         } else if (err) {
             console.log(err);
             return res.status(500).json(err)
+        }else{
+            console.log('\x1b[32m','Uploaded Image!')
+            return res.status(200).json('Uploaded Image!')
         }
-   return res.status(200).json('Uploaded Image')
+  
 
  })
 

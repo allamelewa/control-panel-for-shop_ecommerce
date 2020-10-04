@@ -10,19 +10,28 @@ class Add extends Component {
         price:'',
         info:'',
         img:'',
-        selectedFile: null
+        selectedFile: null,
+        inCart: false,
+        count: 0,
+        total: 0
     }
     ////////////////////////////////////////
     handleSubmit=(event)=>{
         event.preventDefault();
-        const data = new FormData() 
-        data.append('file', this.state.selectedFile)
+        
         if(this.state.id!==''&&this.state.title!==''&&this.state.company!==''&&this.state.price!==''&&this.state.info!==''&&this.state.img!==''){
             const product=this.state;
+            const data = new FormData() ;
+            data.append('file', this.state.selectedFile);
             axios.post('http://localhost:5000/product/add',product)
-           .then(res=>console.log(res.data));
+           .then(res=>{
+            this.setState({ id:'', title:'', company:'', price:'', info:'', inCart: false, count: 0, total: 0})
+            console.log(res.data)});
            axios.post('http://localhost:5000/product/upload',data)
-           .then(res=>console.log(res.data));
+           .then(res=>{
+            this.fileInput.value = "";
+            this.setState({ img:'', selectedFile: null})
+            console.log(res.data)});
         }else{
             alert('Complete Form Please....!');
         }
@@ -69,7 +78,7 @@ class Add extends Component {
                    <div className='row'>
                        <div className='col-sm-12 col-md-6 filed'>
                             <label className='mr-3 col-4 col-md-4 col-xl-2 font-weight-bold'>ID</label>
-                            <input type='number' className='form-control' value={this.state.value} onChange={this.changeId}></input>
+                            <input type='number' className='form-control' value={this.state.id} onChange={this.changeId}></input>
                        </div>
                        <div className='col-sm-12  col-md-6 filed'>
                             <label className='mr-3 col-4 col-md-4 col-xl-2 font-weight-bold'>Title</label>
@@ -85,7 +94,7 @@ class Add extends Component {
                        </div>
                        <div className='col-sm-12  col-md-6 filed'>
                             <label className='mr-3 col-4 col-md-4 col-xl-2 font-weight-bold'>Image</label>
-                            <input  type='file' className='form-control-file'  onChange={this.changeImg} ref={this.fileInput}></input>
+                            <input  type='file' className='form-control-file'  onChange={this.changeImg} ref={ref => this.fileInput = ref}></input>
                        </div>
                        <div className='col-sm-12   filed'>
                             <label className='mr-3 col-4 col-md-2 col-xl-1 font-weight-bold'>Information</label>
