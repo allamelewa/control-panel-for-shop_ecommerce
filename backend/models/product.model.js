@@ -7,6 +7,7 @@ const productSchema=new Schema({
     price:{type:String,required:true},
     company:{type:String,required:true},
     info:{type:String,required:true},
+    img:{type:String,required:true}
 },{
     timestamps:true,
 });
